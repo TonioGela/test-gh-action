@@ -1,0 +1,32 @@
+name: Continuos Integration
+on:
+  pull_request:
+    branches: ['**']
+  push:
+    branches: ['**', '!update/**', '!pr/**']
+
+jobs:
+  check-js-file:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: coursier/cache-action@v6
+      - uses: VirtusLab/scala-cli-setup@main
+      - run: scala-cli --power package -f index.scala
+      - run: git diff --quiet index.js
+
+  test-action-itself:
+    needs: check-js-file
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        id: test-gh-action
+        with:
+          number-one: 3
+          number-two: 9
+      - run: test 12 -eq "${{ steps.test-gh-action.outputs.result }}"
