@@ -16,7 +16,7 @@ jobs:
           java-version: 17
       - uses: coursier/cache-action@v6
       - uses: VirtusLab/scala-cli-setup@main
-      - run: scala-cli --power package -f index.scala
+      - run: scala-cli --power --cli-version 1.0.0-RC2 package -f index.scala
       - run: git diff --quiet index.js
 
   test-action-itself:
