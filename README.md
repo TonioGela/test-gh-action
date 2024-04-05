@@ -1,6 +1,6 @@
 # test-gh-action
 
-Example of a super simple GH Action written in [Scala.js](https://github.com/scala-js/scala-js) using [Scala-CLI](https://github.com/VirtusLab/scala-cli) and the [Typelevel Toolkit](https://github.com/typelevel/toolkit)
+Example of a super simple Github Action written in [Scala.js](https://github.com/scala-js/scala-js) using [scala-cli](https://github.com/VirtusLab/scala-cli) and the [Typelevel Toolkit](https://github.com/typelevel/toolkit) as described in [this blog post](https://toniogela.dev/gh-action-in-scala/).
 
 ```yaml
 - name: Sum numbers with Scala
