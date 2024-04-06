@@ -1,8 +1,14 @@
-//> using scala "3.2.2"
-//> using platform "js"
-//> using jsVersion "1.13.1"
-//> using jsModuleKind "common"
-//> using dep "org.typelevel::toolkit::latest.release"
+//> using platform js
+//> using scala 3.4.1
+//> using toolkit typelevel::0.1.25
+
+//> using jsVersion 1.16.0
+//> using jsEsVersionStr es2021
+//> using jsModuleKind common
+//> using jsMode fullLinkJs
+//> using jsModuleKind smallestmodules
+//> using jsAvoidClasses true
+//> using jsAvoidLetsAndConsts true
 
 import cats.effect.{ExitCode, IO, IOApp}
 import cats.effect.std.Env
