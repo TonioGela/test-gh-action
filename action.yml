@@ -11,5 +11,5 @@ outputs:
   result:
     description: "The sum of the inputs"
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'index.js'
