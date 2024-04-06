@@ -10,28 +10,24 @@
 //> using jsAvoidClasses true
 //> using jsAvoidLetsAndConsts true
 
-import cats.effect.{ExitCode, IO, IOApp}
-import cats.effect.std.Env
+import cats.effect.{ExitCode, IO}
+import cats.syntax.all.*
 import fs2.io.file.{Files, Path}
 import fs2.Stream
+import com.monovore.decline.Opts
+import com.monovore.decline.effect.CommandIOApp
 
-def getInput(input: String): IO[Option[String]] =
-  Env[IO].get(s"INPUT_${input.toUpperCase.replace(' ', '_')}")
+val args = (
+  Opts.env[Int]("INPUT_NUMBER-ONE", "The first number"),
+  Opts.env[Int]("INPUT_NUMBER-TWO", "The second number"),
+  Opts.env[String]("GITHUB_OUTPUT", "The file of the output").map(Path(_))
+)
 
-def outputFile: IO[Path] =
-  Env[IO].get("GITHUB_OUTPUT").map(_.get).map(Path.apply) // unsafe Option.get
-
-def setOutput(name: String, value: String): IO[Unit] =
-  outputFile.flatMap(path =>
-    Stream[IO, String](s"${name}=${value}")
+object index extends CommandIOApp("adder", "Summing two numbers"):
+  def main = args.mapN { (one, two, path) =>
+    Stream(s"result=${one + two}")
       .through(Files[IO].writeUtf8(path))
       .compile
       .drain
-  )
-
-object index extends IOApp.Simple:
-  def run = for {
-    number1 <- getInput("number-one").map(_.get.toInt) // unsafe Option.get
-    number2 <- getInput("number-two").map(_.get.toInt) // unsafe Option.get
-    _ <- setOutput("result", s"${number1 + number2}")
-  } yield ()
+      .as(ExitCode.Success)
+  }
