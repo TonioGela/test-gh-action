@@ -1,8 +1,8 @@
 //> using platform js
-//> using scala 3.4.1
-//> using toolkit typelevel:0.1.25
+//> using scala 3.9.0
+//> using toolkit typelevel:0.2.0
 
-//> using jsVersion 1.16.0
+//> using jsVersion 1.22.0
 //> using jsEsVersionStr es2021
 //> using jsModuleKind common
 //> using jsMode fullLinkJs
