@@ -1,6 +1,6 @@
 //> using platform js
 //> using scala 3.4.1
-//> using toolkit typelevel::0.1.25
+//> using toolkit typelevel:0.1.25
 
 //> using jsVersion 1.16.0
 //> using jsEsVersionStr es2021
